@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post JSON Data</title>
+</head>
+<body>
+    <button id="postButton" data-command="take off">Take Off</button>
+
+    <script>
+        document.getElementById('postButton').addEventListener('click', function() {
+            const dataCommand = this.getAttribute('data-command');
+            fetch('http://127.0.0.1:5000/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ dataCommand: dataCommand })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
